@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cron.Cli", "Cron.Cli\Cron.Cli.csproj", "{D06C4DCE-CDA7-41E5-A494-108C57B87170}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cron.UnitTests", "Cron.UnitTests\Cron.UnitTests.csproj", "{F3F8A6C8-9698-4AE1-9293-07DACE678780}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D06C4DCE-CDA7-41E5-A494-108C57B87170}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D06C4DCE-CDA7-41E5-A494-108C57B87170}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D06C4DCE-CDA7-41E5-A494-108C57B87170}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D06C4DCE-CDA7-41E5-A494-108C57B87170}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3F8A6C8-9698-4AE1-9293-07DACE678780}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3F8A6C8-9698-4AE1-9293-07DACE678780}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3F8A6C8-9698-4AE1-9293-07DACE678780}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3F8A6C8-9698-4AE1-9293-07DACE678780}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
