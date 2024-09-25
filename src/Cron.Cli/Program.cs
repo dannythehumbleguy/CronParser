@@ -4,6 +4,8 @@ var cron2 = new CronExpression("1,2,3,4 * * * *");
 var cron3 = new CronExpression("1-20 * * * *");
 var cron4 = new CronExpression("5 * * * *");
 var cron5 = new CronExpression("1,2,20-30 0-12 1 1,7 *");
+var date = cron2.GetNextExecutionTime();
+Console.WriteLine($"{date:u}");
 
 Console.ReadKey();
 
@@ -50,6 +52,65 @@ public class CronExpression
         DaysOfWeek = ParsePart(parts[4], 1, 7);
     }
     
+    public DateTime GetNextExecutionTime()
+    {
+        var now = DateTime.Now;
+        var minutes = now.Minute;
+        var hour = now.Hour;
+        var month = now.Month;
+        var dayOfMonth = now.Day;
+        var dayOfWeek = (int)now.DayOfWeek + 1;
+        var year = now.Year;
+        
+        var minMinute = now.Minute;
+        var minHour = now.Hour;
+        var minMonth = now.Month;
+        var minDayOfMonth = now.Day;
+        var minYear = now.Year;
+
+        if (Minutes.Any(u => u > minutes))
+        {
+            minMinute = Minutes.Where(u => u > minutes).Min();
+            return new DateTime(minYear, minMonth, minDayOfMonth, minHour, minMinute, 0);
+        }
+        minMinute = Minutes.Min();
+        hour++;
+
+        if (Hours.Any(u => u > hour))
+        {
+            minHour = Hours.Where(u => u > hour).Min();
+            return new DateTime(minYear, minMonth, minDayOfMonth, minHour, minMinute, 0);
+        }
+        minMinute = Minutes.Min();
+        minHour = Hours.Min();
+        dayOfMonth++;
+
+        if (DaysOfMonth.Any(u => u > dayOfMonth))
+        {
+            minDayOfMonth = DaysOfMonth.Where(u => u > dayOfMonth).Min();
+            return new DateTime(minYear, minMonth, minDayOfMonth, minHour, minMinute, 0);
+        }
+        minMinute = Minutes.Min();
+        minHour = Minutes.Min();
+        minDayOfMonth = DaysOfMonth.Min();
+        month++;
+
+        if (Months.Any(u => u > month))
+        {
+            minMonth = Months.Where(u => u > month).Min();
+            return new DateTime(minYear, minMonth, minDayOfMonth, minHour, minMinute, 0);
+        }
+        minMinute = Minutes.Min();
+        minHour = Hours.Min();
+        minDayOfMonth = DaysOfMonth.Min();
+        minMonth = Months.Min();
+        year++;
+        minYear = year;
+
+        //TODO: handle minDayOfMonth if it doesn't exist in the current month
+        //TODO: handle dayOfWeek
+        return new DateTime(minYear, minMonth, minDayOfMonth, minHour, minMinute, 0);
+    }
 
     private List<int> ParsePart(string part, int min, int max)
     {
@@ -91,7 +152,6 @@ public class CronExpression
             throw new ArgumentException($"SYNTAX ERROR: Invalid time definition '{timeDefinition}'");
         }
 
-        executionTimes.Sort();
         return executionTimes.Distinct().ToList();
     }
 
